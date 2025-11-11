@@ -49,7 +49,10 @@ namespace Veterinaria {
 
 
 	private: System::Windows::Forms::DateTimePicker^ dateTimeFecha;
-	private: System::Windows::Forms::Panel^ panelCola;
+	private: System::Windows::Forms::Panel^ PanelCola;
+
+
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ numMascotas;
 
@@ -85,6 +88,8 @@ namespace Veterinaria {
 	private: System::Windows::Forms::TextBox^ numericUpDown1;
 
 	private: System::Windows::Forms::TextBox^ dateTimePicker1;
+	private: System::Windows::Forms::Panel^ panelAtencion;
+
 
 
 
@@ -149,15 +154,18 @@ namespace Veterinaria {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->btnDehacer = (gcnew System::Windows::Forms::Button());
+			this->panelAtencion = (gcnew System::Windows::Forms::Panel());
 			this->btnAtender = (gcnew System::Windows::Forms::Button());
+			this->colaAtencionTtl = (gcnew System::Windows::Forms::Label());
+			this->btnDehacer = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colaAtencionTtl = (gcnew System::Windows::Forms::Label());
-			this->panelCola = (gcnew System::Windows::Forms::Panel());
+			this->PanelCola = (gcnew System::Windows::Forms::Panel());
+			this->numericUpDown1 = (gcnew System::Windows::Forms::TextBox());
+			this->dateTimePicker1 = (gcnew System::Windows::Forms::TextBox());
 			this->ocultarCola = (gcnew System::Windows::Forms::Button());
 			this->limpiar = (gcnew System::Windows::Forms::Button());
 			this->eliminar = (gcnew System::Windows::Forms::Button());
@@ -173,12 +181,11 @@ namespace Veterinaria {
 			this->fecha = (gcnew System::Windows::Forms::Label());
 			this->lblTitulo = (gcnew System::Windows::Forms::Label());
 			this->dateTimeFecha = (gcnew System::Windows::Forms::DateTimePicker());
-			this->dateTimePicker1 = (gcnew System::Windows::Forms::TextBox());
-			this->numericUpDown1 = (gcnew System::Windows::Forms::TextBox());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
+			this->panelAtencion->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
-			this->panelCola->SuspendLayout();
+			this->PanelCola->SuspendLayout();
 			this->panel3->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -189,7 +196,7 @@ namespace Veterinaria {
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Left;
 			this->panel1->Location = System::Drawing::Point(0, 0);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(196, 492);
+			this->panel1->Size = System::Drawing::Size(196, 641);
 			this->panel1->TabIndex = 0;
 			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panel1_Paint);
 			// 
@@ -211,42 +218,73 @@ namespace Veterinaria {
 			this->button2->TabIndex = 0;
 			this->button2->Text = L"Atención en consulta";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// panel2
 			// 
-			this->panel2->Controls->Add(this->btnDehacer);
-			this->panel2->Controls->Add(this->btnAtender);
-			this->panel2->Controls->Add(this->dataGridView1);
+			this->panel2->Controls->Add(this->numericUpDown1);
 			this->panel2->Controls->Add(this->colaAtencionTtl);
-			this->panel2->Controls->Add(this->panelCola);
+			this->panel2->Controls->Add(this->dataGridView1);
+			this->panel2->Controls->Add(this->panelAtencion);
+			this->panel2->Controls->Add(this->PanelCola);
+			this->panel2->Controls->Add(this->dateTimePicker1);
+			this->panel2->Controls->Add(this->label1);
+			this->panel2->Controls->Add(this->txtDueño);
+			this->panel2->Controls->Add(this->numMascotas);
+			this->panel2->Controls->Add(this->nombreDuenio);
+			this->panel2->Controls->Add(this->txtContacto);
+			this->panel2->Controls->Add(this->infoContacto);
+			this->panel2->Controls->Add(this->horaLlegada);
 			this->panel2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel2->Location = System::Drawing::Point(196, 0);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(1130, 492);
+			this->panel2->Size = System::Drawing::Size(1393, 641);
 			this->panel2->TabIndex = 0;
 			this->panel2->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panel2_Paint);
 			// 
-			// btnDehacer
+			// panelAtencion
 			// 
-			this->btnDehacer->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnDehacer->Location = System::Drawing::Point(759, 448);
-			this->btnDehacer->Name = L"btnDehacer";
-			this->btnDehacer->Size = System::Drawing::Size(192, 23);
-			this->btnDehacer->TabIndex = 4;
-			this->btnDehacer->Text = L"Deshacer Atencion";
-			this->btnDehacer->UseVisualStyleBackColor = true;
+			this->panelAtencion->Controls->Add(this->btnAtender);
+			this->panelAtencion->Controls->Add(this->btnDehacer);
+			this->panelAtencion->Location = System::Drawing::Point(441, 465);
+			this->panelAtencion->Name = L"panelAtencion";
+			this->panelAtencion->Size = System::Drawing::Size(842, 72);
+			this->panelAtencion->TabIndex = 5;
 			// 
 			// btnAtender
 			// 
 			this->btnAtender->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnAtender->Location = System::Drawing::Point(632, 448);
+			this->btnAtender->Location = System::Drawing::Point(134, 29);
 			this->btnAtender->Name = L"btnAtender";
-			this->btnAtender->Size = System::Drawing::Size(75, 23);
+			this->btnAtender->Size = System::Drawing::Size(102, 23);
 			this->btnAtender->TabIndex = 3;
 			this->btnAtender->Text = L"Atender";
 			this->btnAtender->UseVisualStyleBackColor = true;
+			this->btnAtender->Click += gcnew System::EventHandler(this, &MyForm::btnAtender_Click);
+			// 
+			// colaAtencionTtl
+			// 
+			this->colaAtencionTtl->AutoSize = true;
+			this->colaAtencionTtl->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->colaAtencionTtl->Location = System::Drawing::Point(716, 121);
+			this->colaAtencionTtl->Name = L"colaAtencionTtl";
+			this->colaAtencionTtl->Size = System::Drawing::Size(370, 39);
+			this->colaAtencionTtl->TabIndex = 1;
+			this->colaAtencionTtl->Text = L"COLA DE ATENCION";
+			this->colaAtencionTtl->Click += gcnew System::EventHandler(this, &MyForm::label2_Click_1);
+			// 
+			// btnDehacer
+			// 
+			this->btnDehacer->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnDehacer->Location = System::Drawing::Point(435, 29);
+			this->btnDehacer->Name = L"btnDehacer";
+			this->btnDehacer->Size = System::Drawing::Size(192, 23);
+			this->btnDehacer->TabIndex = 4;
+			this->btnDehacer->Text = L"Deshacer Atencion";
+			this->btnDehacer->UseVisualStyleBackColor = true;
 			// 
 			// dataGridView1
 			// 
@@ -255,11 +293,11 @@ namespace Veterinaria {
 				this->Column1,
 					this->Column2, this->Column3, this->Column4
 			});
-			this->dataGridView1->Location = System::Drawing::Point(500, 181);
+			this->dataGridView1->Location = System::Drawing::Point(458, 198);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(554, 249);
+			this->dataGridView1->Size = System::Drawing::Size(757, 249);
 			this->dataGridView1->TabIndex = 2;
 			// 
 			// Column1
@@ -290,43 +328,37 @@ namespace Veterinaria {
 			this->Column4->Name = L"Column4";
 			this->Column4->Width = 125;
 			// 
-			// colaAtencionTtl
+			// PanelCola
 			// 
-			this->colaAtencionTtl->AutoSize = true;
-			this->colaAtencionTtl->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->colaAtencionTtl->Location = System::Drawing::Point(531, 123);
-			this->colaAtencionTtl->Name = L"colaAtencionTtl";
-			this->colaAtencionTtl->Size = System::Drawing::Size(370, 39);
-			this->colaAtencionTtl->TabIndex = 1;
-			this->colaAtencionTtl->Text = L"COLA DE ATENCION";
-			this->colaAtencionTtl->Click += gcnew System::EventHandler(this, &MyForm::label2_Click_1);
+			this->PanelCola->Controls->Add(this->ocultarCola);
+			this->PanelCola->Controls->Add(this->limpiar);
+			this->PanelCola->Controls->Add(this->eliminar);
+			this->PanelCola->Controls->Add(this->Agregar);
+			this->PanelCola->Location = System::Drawing::Point(234, 133);
+			this->PanelCola->Name = L"PanelCola";
+			this->PanelCola->Size = System::Drawing::Size(200, 296);
+			this->PanelCola->TabIndex = 0;
 			// 
-			// panelCola
+			// numericUpDown1
 			// 
-			this->panelCola->Controls->Add(this->numericUpDown1);
-			this->panelCola->Controls->Add(this->dateTimePicker1);
-			this->panelCola->Controls->Add(this->ocultarCola);
-			this->panelCola->Controls->Add(this->limpiar);
-			this->panelCola->Controls->Add(this->eliminar);
-			this->panelCola->Controls->Add(this->Agregar);
-			this->panelCola->Controls->Add(this->txtContacto);
-			this->panelCola->Controls->Add(this->txtDueño);
-			this->panelCola->Controls->Add(this->numMascotas);
-			this->panelCola->Controls->Add(this->horaLlegada);
-			this->panelCola->Controls->Add(this->infoContacto);
-			this->panelCola->Controls->Add(this->nombreDuenio);
-			this->panelCola->Controls->Add(this->label1);
-			this->panelCola->Location = System::Drawing::Point(38, 134);
-			this->panelCola->Name = L"panelCola";
-			this->panelCola->Size = System::Drawing::Size(404, 296);
-			this->panelCola->TabIndex = 0;
+			this->numericUpDown1->Location = System::Drawing::Point(27, 384);
+			this->numericUpDown1->Name = L"numericUpDown1";
+			this->numericUpDown1->Size = System::Drawing::Size(201, 22);
+			this->numericUpDown1->TabIndex = 15;
+			this->numericUpDown1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox2_TextChanged);
+			// 
+			// dateTimePicker1
+			// 
+			this->dateTimePicker1->Location = System::Drawing::Point(152, 312);
+			this->dateTimePicker1->Name = L"dateTimePicker1";
+			this->dateTimePicker1->Size = System::Drawing::Size(76, 22);
+			this->dateTimePicker1->TabIndex = 14;
 			// 
 			// ocultarCola
 			// 
 			this->ocultarCola->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->ocultarCola->Location = System::Drawing::Point(263, 224);
+			this->ocultarCola->Location = System::Drawing::Point(61, 229);
 			this->ocultarCola->Name = L"ocultarCola";
 			this->ocultarCola->Size = System::Drawing::Size(118, 30);
 			this->ocultarCola->TabIndex = 13;
@@ -338,7 +370,7 @@ namespace Veterinaria {
 			// 
 			this->limpiar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->limpiar->Location = System::Drawing::Point(263, 172);
+			this->limpiar->Location = System::Drawing::Point(61, 179);
 			this->limpiar->Name = L"limpiar";
 			this->limpiar->Size = System::Drawing::Size(118, 25);
 			this->limpiar->TabIndex = 12;
@@ -349,7 +381,7 @@ namespace Veterinaria {
 			// 
 			this->eliminar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->eliminar->Location = System::Drawing::Point(263, 114);
+			this->eliminar->Location = System::Drawing::Point(61, 117);
 			this->eliminar->Name = L"eliminar";
 			this->eliminar->Size = System::Drawing::Size(118, 29);
 			this->eliminar->TabIndex = 11;
@@ -361,7 +393,7 @@ namespace Veterinaria {
 			// 
 			this->Agregar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Agregar->Location = System::Drawing::Point(263, 58);
+			this->Agregar->Location = System::Drawing::Point(61, 61);
 			this->Agregar->Name = L"Agregar";
 			this->Agregar->Size = System::Drawing::Size(118, 29);
 			this->Agregar->TabIndex = 10;
@@ -371,14 +403,14 @@ namespace Veterinaria {
 			// 
 			// txtContacto
 			// 
-			this->txtContacto->Location = System::Drawing::Point(24, 139);
+			this->txtContacto->Location = System::Drawing::Point(27, 273);
 			this->txtContacto->Name = L"txtContacto";
 			this->txtContacto->Size = System::Drawing::Size(201, 22);
 			this->txtContacto->TabIndex = 6;
 			// 
 			// txtDueño
 			// 
-			this->txtDueño->Location = System::Drawing::Point(24, 83);
+			this->txtDueño->Location = System::Drawing::Point(27, 217);
 			this->txtDueño->Name = L"txtDueño";
 			this->txtDueño->Size = System::Drawing::Size(201, 22);
 			this->txtDueño->TabIndex = 5;
@@ -388,7 +420,7 @@ namespace Veterinaria {
 			this->numMascotas->AutoSize = true;
 			this->numMascotas->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->numMascotas->Location = System::Drawing::Point(21, 231);
+			this->numMascotas->Location = System::Drawing::Point(24, 365);
 			this->numMascotas->Name = L"numMascotas";
 			this->numMascotas->Size = System::Drawing::Size(154, 16);
 			this->numMascotas->TabIndex = 4;
@@ -399,7 +431,7 @@ namespace Veterinaria {
 			this->horaLlegada->AutoSize = true;
 			this->horaLlegada->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->horaLlegada->Location = System::Drawing::Point(23, 181);
+			this->horaLlegada->Location = System::Drawing::Point(26, 315);
 			this->horaLlegada->Name = L"horaLlegada";
 			this->horaLlegada->Size = System::Drawing::Size(120, 16);
 			this->horaLlegada->TabIndex = 3;
@@ -411,7 +443,7 @@ namespace Veterinaria {
 			this->infoContacto->AutoSize = true;
 			this->infoContacto->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->infoContacto->Location = System::Drawing::Point(23, 120);
+			this->infoContacto->Location = System::Drawing::Point(26, 254);
 			this->infoContacto->Name = L"infoContacto";
 			this->infoContacto->Size = System::Drawing::Size(178, 16);
 			this->infoContacto->TabIndex = 2;
@@ -422,7 +454,7 @@ namespace Veterinaria {
 			this->nombreDuenio->AutoSize = true;
 			this->nombreDuenio->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->nombreDuenio->Location = System::Drawing::Point(21, 64);
+			this->nombreDuenio->Location = System::Drawing::Point(24, 198);
 			this->nombreDuenio->Name = L"nombreDuenio";
 			this->nombreDuenio->Size = System::Drawing::Size(135, 16);
 			this->nombreDuenio->TabIndex = 1;
@@ -434,7 +466,7 @@ namespace Veterinaria {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(21, 22);
+			this->label1->Location = System::Drawing::Point(24, 156);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(162, 16);
 			this->label1->TabIndex = 0;
@@ -448,7 +480,7 @@ namespace Veterinaria {
 			this->panel3->Dock = System::Windows::Forms::DockStyle::Top;
 			this->panel3->Location = System::Drawing::Point(196, 0);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(1130, 100);
+			this->panel3->Size = System::Drawing::Size(1393, 100);
 			this->panel3->TabIndex = 0;
 			// 
 			// fecha
@@ -470,9 +502,9 @@ namespace Veterinaria {
 				static_cast<System::Byte>(0)));
 			this->lblTitulo->Location = System::Drawing::Point(20, 22);
 			this->lblTitulo->Name = L"lblTitulo";
-			this->lblTitulo->Size = System::Drawing::Size(110, 39);
+			this->lblTitulo->Size = System::Drawing::Size(382, 39);
 			this->lblTitulo->TabIndex = 1;
-			this->lblTitulo->Text = L"COLA";
+			this->lblTitulo->Text = L"ATENCION A CLIENTE";
 			this->lblTitulo->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
 			// 
 			// dateTimeFecha
@@ -484,26 +516,11 @@ namespace Veterinaria {
 			this->dateTimeFecha->TabIndex = 0;
 			this->dateTimeFecha->ValueChanged += gcnew System::EventHandler(this, &MyForm::dateTimeFecha_ValueChanged);
 			// 
-			// dateTimePicker1
-			// 
-			this->dateTimePicker1->Location = System::Drawing::Point(149, 178);
-			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(76, 22);
-			this->dateTimePicker1->TabIndex = 14;
-			// 
-			// numericUpDown1
-			// 
-			this->numericUpDown1->Location = System::Drawing::Point(24, 250);
-			this->numericUpDown1->Name = L"numericUpDown1";
-			this->numericUpDown1->Size = System::Drawing::Size(201, 22);
-			this->numericUpDown1->TabIndex = 15;
-			this->numericUpDown1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox2_TextChanged);
-			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1326, 492);
+			this->ClientSize = System::Drawing::Size(1589, 641);
 			this->Controls->Add(this->panel3);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
@@ -513,9 +530,9 @@ namespace Veterinaria {
 			this->panel1->ResumeLayout(false);
 			this->panel2->ResumeLayout(false);
 			this->panel2->PerformLayout();
+			this->panelAtencion->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
-			this->panelCola->ResumeLayout(false);
-			this->panelCola->PerformLayout();
+			this->PanelCola->ResumeLayout(false);
 			this->panel3->ResumeLayout(false);
 			this->panel3->PerformLayout();
 			this->ResumeLayout(false);
@@ -533,6 +550,11 @@ namespace Veterinaria {
 	private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	PanelCola->Visible = true;
+	panelAtencion->Visible = false;
+	lblTitulo->Text = "COLA";
+	btnAtender->Visible = false;
+	btnDehacer->Visible = false;
 }
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
@@ -580,6 +602,15 @@ private: System::Void eliminar_Click(System::Object^ sender, System::EventArgs^ 
 			dataGridView1->Rows[0]->Selected = true;
 		}
 	}
+}
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	PanelCola->Visible = false;
+	panelAtencion->Visible = true;
+	lblTitulo->Text = "ATENCION A CLIENTE";
+	btnAtender->Visible = true;
+	btnDehacer->Visible = true;
+}
+private: System::Void btnAtender_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
