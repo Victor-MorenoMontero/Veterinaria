@@ -19,7 +19,7 @@ namespace Classveterinaria {
 			this->Hora_llegada = Hora_llegada;
 			this->cantmascotas = cantmascotas;
 		}
-		String^ getDueño() { return Dueño; }
+		String^ getDuenio() { return Dueño; }
 		String^ getContacto() { return Contacto; }
 		String^ getHora_llegada() { return Hora_llegada; }
 		int getcantmascotas() { return cantmascotas; }
@@ -60,6 +60,28 @@ namespace Classveterinaria {
 		}
 		int ObtenerCantidad() {
 			return cola->Count;
+		}
+	};
+
+	public ref class pila_veterinaria
+	{
+	private:
+		Stack <datos^>^ pila; //defino la pila
+	public:
+		pila_veterinaria() {
+			pila = gcnew Stack<datos^>();
+		}
+		void Agregar(datos^ c) {
+			pila->Push(c);
+		}
+		datos^ Eliminar() {
+			if (pila->Count == 0) return nullptr;
+			datos^ dato = pila->Peek();
+			pila->Pop();
+			return dato;
+		}
+		int ObtenerCantidad() {
+			return pila->Count;
 		}
 	};
 
