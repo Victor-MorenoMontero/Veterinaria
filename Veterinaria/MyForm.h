@@ -19,12 +19,9 @@ namespace Veterinaria {
 	{
 	public:
 
-	cola_veterinaria^ cola_clientes = gcnew(cola_veterinaria);
-	pila_veterinaria^ pila_clientes = gcnew(pila_veterinaria);
-
-
-	public:
-
+		cola_veterinaria^ cola_clientes = gcnew(cola_veterinaria);
+		pila_veterinaria^ pila_clientes = gcnew(pila_veterinaria);
+		lista_Atencion_veterinaria^ lista_atencion = gcnew(lista_Atencion_veterinaria);
 
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
 	private: System::Windows::Forms::NumericUpDown^ numericUpDown1;
@@ -47,20 +44,30 @@ namespace Veterinaria {
 	private: System::Windows::Forms::Label^ infoCContacto;
 
 	private: System::Windows::Forms::Label^ nombreCDueño;
-	private: System::Windows::Forms::TextBox^ textBox5;
+	private: System::Windows::Forms::TextBox^ textTotal;
+
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
-	private: System::Windows::Forms::RadioButton^ radioButton2;
-	private: System::Windows::Forms::RadioButton^ radioButton1;
-	private: System::Windows::Forms::Button^ button7;
-	private: System::Windows::Forms::Button^ button6;
-	private: System::Windows::Forms::Button^ button5;
-	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::RadioButton^ radioButtonNO;
+
+	private: System::Windows::Forms::RadioButton^ radioButtonSI;
+
+	private: System::Windows::Forms::Button^ btnSiguientel;
+
+	private: System::Windows::Forms::Button^ btnAnteriorL;
+
+	private: System::Windows::Forms::Button^ btnPrimeroL;
+
+	private: System::Windows::Forms::Button^ btnInsertarL;
+
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ col1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ col2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ col3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ col4;
-	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ btnUltimoL;
+
+	private: System::Windows::Forms::Button^ btnEliminarL;
+
 
 
 
@@ -129,7 +136,9 @@ namespace Veterinaria {
 	private: System::Windows::Forms::Button^ Agregar;
 	private: System::Windows::Forms::Label^ fecha;
 	private: System::Windows::Forms::Label^ colaAtencionTtl;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+private: System::Windows::Forms::DataGridView^ dataGridView1;
+
+
 
 
 
@@ -150,7 +159,15 @@ namespace Veterinaria {
 	}
 
 
-
+	private: void clear_ventana() {
+		txtCDueño->Text = "";
+		textTotal->Text = "";
+		txtCCantMascotas->Text = "";
+		txtCContacto->Text = "";
+		txtCHora->Text = "";
+		radioButtonSI->Checked = false;
+		radioButtonNO->Checked = false;
+	}
 
 
 
@@ -214,15 +231,16 @@ namespace Veterinaria {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->panelAtencion = (gcnew System::Windows::Forms::Panel());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->button5 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->btnUltimoL = (gcnew System::Windows::Forms::Button());
+			this->btnSiguientel = (gcnew System::Windows::Forms::Button());
+			this->btnAnteriorL = (gcnew System::Windows::Forms::Button());
+			this->btnPrimeroL = (gcnew System::Windows::Forms::Button());
+			this->btnInsertarL = (gcnew System::Windows::Forms::Button());
+			this->btnEliminarL = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->radioButtonNO = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButtonSI = (gcnew System::Windows::Forms::RadioButton());
+			this->textTotal = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->txtCCantMascotas = (gcnew System::Windows::Forms::TextBox());
 			this->txtCHora = (gcnew System::Windows::Forms::TextBox());
@@ -270,7 +288,7 @@ namespace Veterinaria {
 			// 
 			// panel1
 			// 
-			this->panel1->BackColor = System::Drawing::SystemColors::Control;
+			this->panel1->BackColor = System::Drawing::SystemColors::InactiveCaption;
 			this->panel1->Controls->Add(this->button1);
 			this->panel1->Controls->Add(this->button2);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Left;
@@ -283,26 +301,37 @@ namespace Veterinaria {
 			// 
 			// button1
 			// 
+			this->button1->BackColor = System::Drawing::SystemColors::Menu;
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->ForeColor = System::Drawing::SystemColors::Desktop;
 			this->button1->Location = System::Drawing::Point(26, 64);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(120, 36);
+			this->button1->Size = System::Drawing::Size(136, 53);
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"Cola de ingreso";
-			this->button1->UseVisualStyleBackColor = true;
+			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(13, 123);
+			this->button2->BackColor = System::Drawing::SystemColors::Menu;
+			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button2->ForeColor = System::Drawing::SystemColors::Desktop;
+			this->button2->Location = System::Drawing::Point(26, 152);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(149, 49);
 			this->button2->TabIndex = 0;
 			this->button2->Text = L"Atención en consulta";
-			this->button2->UseVisualStyleBackColor = true;
+			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// panel2
 			// 
+			this->panel2->BackColor = System::Drawing::SystemColors::Info;
 			this->panel2->Controls->Add(this->panelAtencion);
 			this->panel2->Controls->Add(this->btnAtender);
 			this->panel2->Controls->Add(this->btnDehacer);
@@ -318,13 +347,15 @@ namespace Veterinaria {
 			// 
 			// panelAtencion
 			// 
-			this->panelAtencion->Controls->Add(this->button7);
-			this->panelAtencion->Controls->Add(this->button6);
-			this->panelAtencion->Controls->Add(this->button5);
-			this->panelAtencion->Controls->Add(this->button4);
-			this->panelAtencion->Controls->Add(this->button3);
+			this->panelAtencion->BackColor = System::Drawing::SystemColors::Info;
+			this->panelAtencion->Controls->Add(this->btnUltimoL);
+			this->panelAtencion->Controls->Add(this->btnSiguientel);
+			this->panelAtencion->Controls->Add(this->btnAnteriorL);
+			this->panelAtencion->Controls->Add(this->btnPrimeroL);
+			this->panelAtencion->Controls->Add(this->btnInsertarL);
+			this->panelAtencion->Controls->Add(this->btnEliminarL);
 			this->panelAtencion->Controls->Add(this->groupBox1);
-			this->panelAtencion->Controls->Add(this->textBox5);
+			this->panelAtencion->Controls->Add(this->textTotal);
 			this->panelAtencion->Controls->Add(this->label2);
 			this->panelAtencion->Controls->Add(this->txtCCantMascotas);
 			this->panelAtencion->Controls->Add(this->txtCHora);
@@ -336,58 +367,92 @@ namespace Veterinaria {
 			this->panelAtencion->Controls->Add(this->nombreCDueño);
 			this->panelAtencion->Location = System::Drawing::Point(27, 138);
 			this->panelAtencion->Name = L"panelAtencion";
-			this->panelAtencion->Size = System::Drawing::Size(527, 566);
+			this->panelAtencion->Size = System::Drawing::Size(537, 566);
 			this->panelAtencion->TabIndex = 5;
 			// 
-			// button7
+			// btnUltimoL
 			// 
-			this->button7->Location = System::Drawing::Point(336, 464);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(75, 23);
-			this->button7->TabIndex = 15;
-			this->button7->Text = L"button7";
-			this->button7->UseVisualStyleBackColor = true;
+			this->btnUltimoL->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->btnUltimoL->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnUltimoL->Location = System::Drawing::Point(364, 497);
+			this->btnUltimoL->Name = L"btnUltimoL";
+			this->btnUltimoL->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
+			this->btnUltimoL->Size = System::Drawing::Size(75, 23);
+			this->btnUltimoL->TabIndex = 16;
+			this->btnUltimoL->Text = L"Ultimo";
+			this->btnUltimoL->UseVisualStyleBackColor = false;
+			this->btnUltimoL->Click += gcnew System::EventHandler(this, &MyForm::btnUltimoL_Click);
 			// 
-			// button6
+			// btnSiguientel
 			// 
-			this->button6->Location = System::Drawing::Point(268, 464);
-			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(75, 23);
-			this->button6->TabIndex = 14;
-			this->button6->Text = L"button6";
-			this->button6->UseVisualStyleBackColor = true;
+			this->btnSiguientel->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->btnSiguientel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnSiguientel->Location = System::Drawing::Point(271, 496);
+			this->btnSiguientel->Name = L"btnSiguientel";
+			this->btnSiguientel->Size = System::Drawing::Size(92, 24);
+			this->btnSiguientel->TabIndex = 15;
+			this->btnSiguientel->Text = L"Siguiente";
+			this->btnSiguientel->UseVisualStyleBackColor = false;
+			this->btnSiguientel->Click += gcnew System::EventHandler(this, &MyForm::btnSiguientel_Click);
 			// 
-			// button5
+			// btnAnteriorL
 			// 
-			this->button5->Location = System::Drawing::Point(93, 465);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(75, 23);
-			this->button5->TabIndex = 13;
-			this->button5->Text = L"button5";
-			this->button5->UseVisualStyleBackColor = true;
+			this->btnAnteriorL->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->btnAnteriorL->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnAnteriorL->Location = System::Drawing::Point(181, 496);
+			this->btnAnteriorL->Name = L"btnAnteriorL";
+			this->btnAnteriorL->Size = System::Drawing::Size(88, 23);
+			this->btnAnteriorL->TabIndex = 14;
+			this->btnAnteriorL->Text = L"Anterior";
+			this->btnAnteriorL->UseVisualStyleBackColor = false;
+			this->btnAnteriorL->Click += gcnew System::EventHandler(this, &MyForm::btnAnteriorL_Click);
 			// 
-			// button4
+			// btnPrimeroL
 			// 
-			this->button4->Location = System::Drawing::Point(301, 413);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(75, 23);
-			this->button4->TabIndex = 12;
-			this->button4->Text = L"button4";
-			this->button4->UseVisualStyleBackColor = true;
+			this->btnPrimeroL->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->btnPrimeroL->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnPrimeroL->Location = System::Drawing::Point(91, 495);
+			this->btnPrimeroL->Name = L"btnPrimeroL";
+			this->btnPrimeroL->Size = System::Drawing::Size(88, 24);
+			this->btnPrimeroL->TabIndex = 13;
+			this->btnPrimeroL->Text = L"Primero";
+			this->btnPrimeroL->UseVisualStyleBackColor = false;
+			this->btnPrimeroL->Click += gcnew System::EventHandler(this, &MyForm::btnPrimeroL_Click);
 			// 
-			// button3
+			// btnInsertarL
 			// 
-			this->button3->Location = System::Drawing::Point(189, 413);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 23);
-			this->button3->TabIndex = 11;
-			this->button3->Text = L"button3";
-			this->button3->UseVisualStyleBackColor = true;
+			this->btnInsertarL->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->btnInsertarL->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnInsertarL->Location = System::Drawing::Point(257, 457);
+			this->btnInsertarL->Name = L"btnInsertarL";
+			this->btnInsertarL->Size = System::Drawing::Size(182, 33);
+			this->btnInsertarL->TabIndex = 12;
+			this->btnInsertarL->Text = L"Insertar";
+			this->btnInsertarL->UseVisualStyleBackColor = false;
+			this->btnInsertarL->Click += gcnew System::EventHandler(this, &MyForm::btnInsertarL_Click);
+			// 
+			// btnEliminarL
+			// 
+			this->btnEliminarL->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->btnEliminarL->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnEliminarL->Location = System::Drawing::Point(93, 456);
+			this->btnEliminarL->Name = L"btnEliminarL";
+			this->btnEliminarL->Size = System::Drawing::Size(161, 34);
+			this->btnEliminarL->TabIndex = 11;
+			this->btnEliminarL->Text = L"Eliminar";
+			this->btnEliminarL->UseVisualStyleBackColor = false;
+			this->btnEliminarL->Click += gcnew System::EventHandler(this, &MyForm::btnEliminarL_Click);
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->radioButton2);
-			this->groupBox1->Controls->Add(this->radioButton1);
+			this->groupBox1->Controls->Add(this->radioButtonNO);
+			this->groupBox1->Controls->Add(this->radioButtonSI);
 			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->groupBox1->Location = System::Drawing::Point(329, 156);
@@ -397,39 +462,41 @@ namespace Veterinaria {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Pagado";
 			// 
-			// radioButton2
+			// radioButtonNO
 			// 
-			this->radioButton2->AutoSize = true;
-			this->radioButton2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->radioButtonNO->AutoSize = true;
+			this->radioButtonNO->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->radioButton2->Location = System::Drawing::Point(37, 67);
-			this->radioButton2->Name = L"radioButton2";
-			this->radioButton2->Size = System::Drawing::Size(46, 20);
-			this->radioButton2->TabIndex = 1;
-			this->radioButton2->TabStop = true;
-			this->radioButton2->Text = L"No";
-			this->radioButton2->UseVisualStyleBackColor = true;
+			this->radioButtonNO->Location = System::Drawing::Point(37, 67);
+			this->radioButtonNO->Name = L"radioButtonNO";
+			this->radioButtonNO->Size = System::Drawing::Size(46, 20);
+			this->radioButtonNO->TabIndex = 1;
+			this->radioButtonNO->TabStop = true;
+			this->radioButtonNO->Text = L"No";
+			this->radioButtonNO->UseVisualStyleBackColor = true;
 			// 
-			// radioButton1
+			// radioButtonSI
 			// 
-			this->radioButton1->AutoSize = true;
-			this->radioButton1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->radioButtonSI->AutoSize = true;
+			this->radioButtonSI->BackColor = System::Drawing::SystemColors::Info;
+			this->radioButtonSI->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->radioButton1->Location = System::Drawing::Point(37, 31);
-			this->radioButton1->Name = L"radioButton1";
-			this->radioButton1->Size = System::Drawing::Size(40, 20);
-			this->radioButton1->TabIndex = 0;
-			this->radioButton1->TabStop = true;
-			this->radioButton1->Text = L"Sí";
-			this->radioButton1->UseVisualStyleBackColor = true;
-			this->radioButton1->CheckedChanged += gcnew System::EventHandler(this, &MyForm::radioButton1_CheckedChanged);
+			this->radioButtonSI->ImageAlign = System::Drawing::ContentAlignment::BottomLeft;
+			this->radioButtonSI->Location = System::Drawing::Point(37, 31);
+			this->radioButtonSI->Name = L"radioButtonSI";
+			this->radioButtonSI->Size = System::Drawing::Size(40, 20);
+			this->radioButtonSI->TabIndex = 0;
+			this->radioButtonSI->TabStop = true;
+			this->radioButtonSI->Text = L"Sí";
+			this->radioButtonSI->UseVisualStyleBackColor = false;
+			this->radioButtonSI->CheckedChanged += gcnew System::EventHandler(this, &MyForm::radioButton1_CheckedChanged);
 			// 
-			// textBox5
+			// textTotal
 			// 
-			this->textBox5->Location = System::Drawing::Point(340, 102);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(100, 22);
-			this->textBox5->TabIndex = 9;
+			this->textTotal->Location = System::Drawing::Point(340, 102);
+			this->textTotal->Name = L"textTotal";
+			this->textTotal->Size = System::Drawing::Size(100, 22);
+			this->textTotal->TabIndex = 9;
 			// 
 			// label2
 			// 
@@ -521,36 +588,38 @@ namespace Veterinaria {
 			// 
 			// btnAtender
 			// 
-			this->btnAtender->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnAtender->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->btnAtender->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnAtender->Location = System::Drawing::Point(729, 670);
+			this->btnAtender->Location = System::Drawing::Point(912, 518);
 			this->btnAtender->Name = L"btnAtender";
-			this->btnAtender->Size = System::Drawing::Size(102, 23);
+			this->btnAtender->Size = System::Drawing::Size(141, 37);
 			this->btnAtender->TabIndex = 3;
 			this->btnAtender->Text = L"Atender";
-			this->btnAtender->UseVisualStyleBackColor = true;
+			this->btnAtender->UseVisualStyleBackColor = false;
 			this->btnAtender->Click += gcnew System::EventHandler(this, &MyForm::btnAtender_Click);
 			// 
 			// btnDehacer
 			// 
-			this->btnDehacer->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnDehacer->BackColor = System::Drawing::SystemColors::ControlLight;
+			this->btnDehacer->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnDehacer->Location = System::Drawing::Point(1035, 635);
+			this->btnDehacer->Location = System::Drawing::Point(1141, 518);
 			this->btnDehacer->Name = L"btnDehacer";
-			this->btnDehacer->Size = System::Drawing::Size(192, 23);
+			this->btnDehacer->Size = System::Drawing::Size(191, 37);
 			this->btnDehacer->TabIndex = 4;
 			this->btnDehacer->Text = L"Deshacer Atencion";
-			this->btnDehacer->UseVisualStyleBackColor = true;
+			this->btnDehacer->UseVisualStyleBackColor = false;
 			this->btnDehacer->Click += gcnew System::EventHandler(this, &MyForm::btnDehacer_Click);
 			// 
 			// colaAtencionTtl
 			// 
 			this->colaAtencionTtl->AutoSize = true;
-			this->colaAtencionTtl->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->colaAtencionTtl->Font = (gcnew System::Drawing::Font(L"Lucida Calligraphy", 19.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->colaAtencionTtl->Location = System::Drawing::Point(904, 148);
 			this->colaAtencionTtl->Name = L"colaAtencionTtl";
-			this->colaAtencionTtl->Size = System::Drawing::Size(370, 39);
+			this->colaAtencionTtl->Size = System::Drawing::Size(428, 43);
 			this->colaAtencionTtl->TabIndex = 1;
 			this->colaAtencionTtl->Text = L"COLA DE ATENCION";
 			this->colaAtencionTtl->Click += gcnew System::EventHandler(this, &MyForm::label2_Click_1);
@@ -562,11 +631,11 @@ namespace Veterinaria {
 				this->col1, this->col2,
 					this->col3, this->col4
 			});
-			this->dataGridView1->Location = System::Drawing::Point(646, 225);
+			this->dataGridView1->Location = System::Drawing::Point(768, 230);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(757, 249);
+			this->dataGridView1->Size = System::Drawing::Size(718, 249);
 			this->dataGridView1->TabIndex = 2;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
 			// 
@@ -633,23 +702,25 @@ namespace Veterinaria {
 			this->dateTimePicker1->Name = L"dateTimePicker1";
 			this->dateTimePicker1->ShowUpDown = true;
 			this->dateTimePicker1->Size = System::Drawing::Size(76, 22);
-			this->dateTimePicker1->TabIndex = 16;
-			this->dateTimePicker1->Value = System::DateTime(2025, 11, 12, 0, 0, 0, 0);
+			this->dateTimePicker1->TabIndex = 6;
+			this->dateTimePicker1->Value = System::DateTime(2025, 11, 12, 12, 0, 0, 0);
 			// 
 			// ocultarCola
 			// 
+			this->ocultarCola->BackColor = System::Drawing::SystemColors::Control;
 			this->ocultarCola->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->ocultarCola->Location = System::Drawing::Point(337, 354);
+			this->ocultarCola->Location = System::Drawing::Point(329, 355);
 			this->ocultarCola->Name = L"ocultarCola";
-			this->ocultarCola->Size = System::Drawing::Size(118, 30);
+			this->ocultarCola->Size = System::Drawing::Size(142, 31);
 			this->ocultarCola->TabIndex = 13;
 			this->ocultarCola->Text = L"Ocultar la cola";
-			this->ocultarCola->UseVisualStyleBackColor = true;
+			this->ocultarCola->UseVisualStyleBackColor = false;
 			this->ocultarCola->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
 			// 
 			// limpiar
 			// 
+			this->limpiar->BackColor = System::Drawing::SystemColors::Control;
 			this->limpiar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->limpiar->Location = System::Drawing::Point(337, 282);
@@ -657,10 +728,12 @@ namespace Veterinaria {
 			this->limpiar->Size = System::Drawing::Size(118, 25);
 			this->limpiar->TabIndex = 12;
 			this->limpiar->Text = L"Limpiar";
-			this->limpiar->UseVisualStyleBackColor = true;
+			this->limpiar->UseVisualStyleBackColor = false;
+			this->limpiar->Click += gcnew System::EventHandler(this, &MyForm::limpiar_Click);
 			// 
 			// eliminar
 			// 
+			this->eliminar->BackColor = System::Drawing::SystemColors::Control;
 			this->eliminar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->eliminar->Location = System::Drawing::Point(337, 214);
@@ -668,11 +741,12 @@ namespace Veterinaria {
 			this->eliminar->Size = System::Drawing::Size(118, 29);
 			this->eliminar->TabIndex = 11;
 			this->eliminar->Text = L"Eliminar";
-			this->eliminar->UseVisualStyleBackColor = true;
+			this->eliminar->UseVisualStyleBackColor = false;
 			this->eliminar->Click += gcnew System::EventHandler(this, &MyForm::eliminar_Click);
 			// 
 			// Agregar
 			// 
+			this->Agregar->BackColor = System::Drawing::SystemColors::Control;
 			this->Agregar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Agregar->Location = System::Drawing::Point(337, 136);
@@ -680,7 +754,7 @@ namespace Veterinaria {
 			this->Agregar->Size = System::Drawing::Size(118, 29);
 			this->Agregar->TabIndex = 10;
 			this->Agregar->Text = L"Agregar";
-			this->Agregar->UseVisualStyleBackColor = true;
+			this->Agregar->UseVisualStyleBackColor = false;
 			this->Agregar->Click += gcnew System::EventHandler(this, &MyForm::Agregar_Click);
 			// 
 			// label1
@@ -759,6 +833,7 @@ namespace Veterinaria {
 			// 
 			// panel3
 			// 
+			this->panel3->BackColor = System::Drawing::SystemColors::GradientActiveCaption;
 			this->panel3->Controls->Add(this->fecha);
 			this->panel3->Controls->Add(this->lblTitulo);
 			this->panel3->Controls->Add(this->dateTimeFecha);
@@ -773,7 +848,7 @@ namespace Veterinaria {
 			this->fecha->AutoSize = true;
 			this->fecha->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->fecha->Location = System::Drawing::Point(756, 39);
+			this->fecha->Location = System::Drawing::Point(1108, 41);
 			this->fecha->Name = L"fecha";
 			this->fecha->Size = System::Drawing::Size(50, 16);
 			this->fecha->TabIndex = 2;
@@ -783,11 +858,11 @@ namespace Veterinaria {
 			// lblTitulo
 			// 
 			this->lblTitulo->AutoSize = true;
-			this->lblTitulo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->lblTitulo->Font = (gcnew System::Drawing::Font(L"Lucida Calligraphy", 25, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblTitulo->Location = System::Drawing::Point(20, 22);
+			this->lblTitulo->Location = System::Drawing::Point(97, 25);
 			this->lblTitulo->Name = L"lblTitulo";
-			this->lblTitulo->Size = System::Drawing::Size(382, 39);
+			this->lblTitulo->Size = System::Drawing::Size(591, 55);
 			this->lblTitulo->TabIndex = 1;
 			this->lblTitulo->Text = L"ATENCION A CLIENTE";
 			this->lblTitulo->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
@@ -795,7 +870,7 @@ namespace Veterinaria {
 			// dateTimeFecha
 			// 
 			this->dateTimeFecha->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dateTimeFecha->Location = System::Drawing::Point(812, 39);
+			this->dateTimeFecha->Location = System::Drawing::Point(1164, 39);
 			this->dateTimeFecha->Name = L"dateTimeFecha";
 			this->dateTimeFecha->Size = System::Drawing::Size(200, 22);
 			this->dateTimeFecha->TabIndex = 0;
@@ -840,6 +915,7 @@ namespace Veterinaria {
 	private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	
 	PanelCola->Visible = true;
 	panelAtencion->Visible = false;
 	lblTitulo->Text = "COLA";
@@ -855,6 +931,14 @@ private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e)
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (dataGridView1->Visible) {
+		dataGridView1->Visible = false;
+		ocultarCola->Text = "Mostrar la cola";
+	}
+	else {
+		dataGridView1->Visible = true;
+		ocultarCola->Text = "Ocultar la cola";
+	}
 }
 private: System::Void fecha_Click(System::Object^ sender, System::EventArgs^ e) {
 }
@@ -901,6 +985,9 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	btnDehacer->Visible = true;
 }
 private: System::Void btnAtender_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	clear_atencion();
+
 	datos^ primero;
 	// Sacando de la cola, para atender
 	primero = cola_clientes->EliminarInicio();
@@ -935,7 +1022,7 @@ private: System::Void btnDehacer_Click(System::Object^ sender, System::EventArgs
 		dataGridView1->Rows->Insert(0, primero->getDuenio(), primero->getContacto(), primero->getHora_llegada(), primero->getcantmascotas());
 		dataGridView1->SelectionMode = DataGridViewSelectionMode::FullRowSelect;
 		dataGridView1->CurrentCell = dataGridView1->Rows[0]->Cells[0];
-		//clear_atencion();
+		clear_atencion();
 	}
 }
 	
@@ -964,6 +1051,120 @@ private: System::Void horaCLlegada_Click(System::Object^ sender, System::EventAr
 }
 private: System::Void radioButton1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 }
+private: System::Void btnEliminarL_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (lista_atencion->Eliminar(txtCDueño->Text)) {
+		MessageBox::Show("Se eliminó con éxito", "Éxito", MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+	}
+	else {
+		MessageBox::Show("No se encontró ese nombre", "Error", MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+	}
+}
+private: System::Void btnPrimeroL_Click(System::Object^ sender, System::EventArgs^ e) {
+	datos_atencion^ primero;
+	primero = lista_atencion->Primero(); //Devuelve el primero de la lista
+	if (primero != nullptr) {
+		txtCDueño->Text = primero->getdueno()->getDuenio();
+		txtCContacto->Text = primero->getdueno()->getContacto();
+		txtCHora->Text = primero->getdueno()->getHora_llegada();
+		textTotal->Text = primero->getcosto().ToString();
+		txtCCantMascotas->Text = primero->getdueno()->getcantmascotas().ToString();
+		if (primero->getpagado()) {
+			radioButtonSI->Checked = true;
+			radioButtonNO->Checked = false;
+		}
+		else {
+			radioButtonSI->Checked = false;
+			radioButtonNO->Checked = true;
+		}
+	}
+}
+private: System::Void btnInsertarL_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	if (txtCDueño->Text != "") {
+		bool atendido;
+		bool pagado;
+		double pago = Double::Parse(textTotal->Text);
+		String^ texto = txtCCantMascotas->Text;
+		int numero = Int32::Parse(texto);
+		if (radioButtonSI->Checked == true) pagado = true;
+		if (radioButtonNO->Checked == true) pagado = false;
+		datos^ nuevo = gcnew datos(txtCDueño->Text, txtCContacto->Text, txtCHora->Text, numero);
+		datos_atencion^ nueva = gcnew datos_atencion(dateTimePicker1->Value, pago, pagado, nuevo);
+		lista_atencion->Agregar(nueva);//_1?????
+		clear_ventana();
+		atendido = true;
+	}
+
+}
+private: System::Void btnUltimoL_Click(System::Object^ sender, System::EventArgs^ e) {
+	datos_atencion^ ultimo;
+	ultimo = lista_atencion->Ultimo(); //Devuelve el primero de la lista
+	if (ultimo != nullptr) {
+		txtCDueño->Text = ultimo->getdueno()->getDuenio();
+		txtCContacto->Text = ultimo->getdueno()->getContacto();
+		txtCHora->Text = ultimo->getdueno()->getHora_llegada();
+		textTotal->Text = ultimo->getcosto().ToString();
+		if (ultimo->getpagado()) {
+			radioButtonSI->Checked = true;
+			radioButtonNO->Checked = false;
+		}
+		else {
+			radioButtonSI->Checked = false;
+			radioButtonNO->Checked = true;
+		}
+	}
+}
+private: System::Void btnAnteriorL_Click(System::Object^ sender, System::EventArgs^ e) {
+	datos_atencion^ anterior;
+	anterior = lista_atencion->Anterior(txtCDueño->Text); //Devuelve el anterior a uno de la lista
+	if (anterior != nullptr) {
+		txtCDueño->Text = anterior->getdueno()->getDuenio();
+		txtContacto->Text = anterior->getdueno()->getContacto();
+		txtCHora->Text = anterior->getdueno()->getHora_llegada();
+		textTotal->Text = anterior->getcosto().ToString();
+		if (anterior->getpagado()) {
+			radioButtonSI->Checked = true;
+			radioButtonNO->Checked = false;
+		}
+		else {
+			radioButtonSI->Checked = false;
+			radioButtonNO->Checked = true;
+		}
+	}
+
+}
+private: System::Void btnSiguientel_Click(System::Object^ sender, System::EventArgs^ e) {
+	datos_atencion^ siguiente;
+	siguiente = lista_atencion->Siguiente(txtCDueño->Text); //Devuelve el anterior a uno de la lista
+	if (siguiente != nullptr) {
+		txtCDueño->Text = siguiente->getdueno()->getDuenio();
+		txtCContacto->Text = siguiente->getdueno()->getContacto();
+		txtCHora->Text = siguiente->getdueno()->getHora_llegada();
+		textTotal->Text = siguiente->getcosto().ToString();
+		if (siguiente->getpagado()) {
+			radioButtonSI->Checked = true;
+			radioButtonNO->Checked = false;
+		}
+		else {
+			radioButtonSI->Checked = false;
+			radioButtonNO->Checked = true;
+		}
+	}
+}
+private: System::Void limpiar_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	this->txtDueño->Text = "";           // Asigna una cadena vacía al TextBox del Dueño
+	this->txtContacto->Text = "";
+	this->numericUpDown1->Value = this->numericUpDown1->Minimum;
+	this->dateTimePicker1->Value = System::DateTime::Now;
+	MessageBox::Show("Todos los campos han sido limpiados.", "Limpiar");
+	// Limpiar el DataGridView
+	dataGridView1->Rows->Clear();
+	// Limpiar la cola de clientes
+	cola_clientes = gcnew cola_veterinaria();
+}
 };
   };
-//}
+
